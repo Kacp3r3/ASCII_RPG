@@ -15,15 +15,16 @@ public:
 	Vec2d getPos();
 
 public:
-	virtual void Update(float fElapsedTime, Dynamic* player = nullptr) {}
+	virtual void Update(Dynamic* player = nullptr) {}
 	virtual void OnInteract(Dynamic* player = nullptr) {}
+	
 protected:
 	Coords cPos;
 	bool bSolidVsMap;
 	bool bSolidVsDyn;
 	bool bFriendly;
 	bool bIsAttackable;
-
+	
 	std::string sName;
 };
 

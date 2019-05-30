@@ -12,12 +12,22 @@ public:
 public:
 	void Move(const Vec2d& move);
 public:
-	virtual void Update(float fElapsedTime, Dynamic* player = nullptr) {}
+	virtual void Update(Dynamic* player = nullptr) 
+	{
+
+	}
 	virtual void OnInteract(Dynamic* player = nullptr) {}
 	virtual void PerformAttack() {};
 protected:
 	Vec2d wLast;
 public:
 	Stats s;
+};
+
+class Enemy : public Character
+{
+	Enemy(double x, double y) : Character(x, y) { s.nDamage = 10; };
+	void OnInteract(Dynamic* player = nullptr) {};
+
 };
 

@@ -4,7 +4,7 @@
 Character::Character(double x, double y)
 	:
 	 Dynamic(x,y)
-	,s(100,10,5,1)
+	, s(100, 10, 5, 1)
 {
 }
 

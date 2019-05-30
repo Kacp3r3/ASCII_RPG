@@ -109,7 +109,7 @@ void GUI::DrawLine(size_t starty)
 void GUI::Stats(size_t& starty)
 {
 	//goTo(Start.X + 1, Start.Y + i); printf("Base Stats"); ++i;//1
-	goTo(Start.X + 1, Start.Y + starty); printf("Lvl    : %d",player.getLvl()); printf(" XP: %d/%d       ", player.getcurxp(),player.getreqxp()); ++starty; //2
+	goTo(Start.X + 1, Start.Y + starty); printf("Lvl    : %d",(int)player.getLvl()); printf(" XP: %d/%d       ", player.getcurxp(),player.getreqxp()); ++starty; //2
 	goTo(Start.X + 1, Start.Y + starty); printf("Health : "); printf("%d/%d       ", (int)player.s.nHealth,(int)player.s.nMaxHealth); ++starty; //2
 	goTo(Start.X + 1, Start.Y + starty); printf("Damage : "); printf("%d  ", (int)player.s.nDamage); ++starty; //3
 	goTo(Start.X + 1, Start.Y + starty); printf("Armor  : "); printf("%d  ", (int)player.s.nArmor); ++starty; //4
