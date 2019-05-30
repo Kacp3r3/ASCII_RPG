@@ -1,6 +1,13 @@
 #include "GameEngine.h"
 
-GameEngine::GameEngine() : _map("res/lvl.data"), cam(_map.getWidth()/2,_map.getHeight()/2), p(_map.getWidth() / 2, _map.getHeight() / 2)
+GameEngine::GameEngine() 
+	: 
+	 _map("res/lvl.data")
+	,cam(_map.getWidth()/2
+	,_map.getHeight()/2)
+	,p(_map.getWidth() / 2
+	,_map.getHeight() / 2)
+	,hasmoved(false)
 {
 }
 
@@ -15,8 +22,11 @@ void GameEngine::Start()
 	while (true)
 	{
 		ProcessInput();
-		UpdateModels();
-		ComposeFrame();
+		if (hasmoved == true)
+		{
+			UpdateModels();
+			ComposeFrame();
+		}
 	}
 }
 
@@ -38,8 +48,10 @@ void GameEngine::ProcessPlayerMove(Vec2d move)
 			switch (CheckColission(tmp))
 			{
 			case Tile::Content::WALL:
+				hasmoved = false;
 				break;
 			default:
+				hasmoved = true;
 				p.Move(move);
 			}
 		}

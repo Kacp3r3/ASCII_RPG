@@ -1,12 +1,12 @@
 #include "Item.h"
-
+#include "../Dynamics/Player.h"
 
 
 Item::Item()
 	:
 	 s()
 	,cat(Undefined)
-	,sName("undefined")
+	,sName("None")
 {
 }
 
@@ -45,11 +45,7 @@ void Item::Use(Player & ch)
 	{
 		case Useable:
 		{
-			ch.nHealth+=s.nHealth;
-			ch.nMaxHealth+=s.nMaxHealth;
-			ch.nDamage += s.nDamage;
-			ch.nSpeed += s.nSpeed;
-			ch.nArmor += s.nArmor;
+			ch.s += s;
 			break;
 		}
 		case Helmet:
@@ -69,5 +65,8 @@ void Item::Use(Player & ch)
 		}
 		case Undefined:
 		default:
+		{
+			break;
+		}
 	}
 }

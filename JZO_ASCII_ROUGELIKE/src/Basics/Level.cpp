@@ -3,6 +3,10 @@
 
 
 Level::Level()
+	:
+	 CurrentLvl(1)
+	,CurrentXP(0)
+	,RequiredXP(100)
 {
 }
 

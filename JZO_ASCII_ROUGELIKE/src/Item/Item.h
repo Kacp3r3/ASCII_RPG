@@ -7,7 +7,8 @@
 
 //Own libs
 #include "../Basics/Basics.h"
-#include "../Dynamics/Player.h"
+
+class Player;
 
 class Item
 {
@@ -29,10 +30,11 @@ public:
 
 
 public:
-	void Use(Character &ch);
+	void Use(Player &sp);
 public:
 	Category getCategory() { return cat; }
 	Stats& getStats() { return s; }
+	std::string getName() { return sName; }
 private:
 	Category cat;
 	Stats s;

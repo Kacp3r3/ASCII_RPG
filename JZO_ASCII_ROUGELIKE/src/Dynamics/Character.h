@@ -3,7 +3,6 @@
 #include "../Basics/Level.h"
 class Character :
 	public Dynamic,
-	public Stats,
 	public Level
 {
 public:
@@ -18,5 +17,7 @@ public:
 	virtual void PerformAttack() {};
 protected:
 	Vec2d wLast;
+public:
+	Stats s;
 };
 

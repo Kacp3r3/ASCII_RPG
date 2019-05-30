@@ -27,10 +27,10 @@ private:
 
 	//Odpowiednie sekcje
 private:
-	void Stats(size_t starty);
-	void Equipement(size_t starty);
-	void DialogueBox(size_t starty);
-	void FightInfo(size_t starty);
+	void Stats(size_t &starty);
+	void Equipement(size_t& starty);
+	void DialogueBox(size_t& starty);
+	void FightInfo(size_t& starty);
 private:
 	HANDLE h;
 	COORD Start;

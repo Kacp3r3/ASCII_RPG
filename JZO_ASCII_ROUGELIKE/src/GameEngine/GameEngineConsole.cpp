@@ -1,19 +1,17 @@
 ﻿#include "GameEngineConsole.h"
 
-
-
 GameEngineConsole::GameEngineConsole()
 	:
-	 hnd(GetStdHandle(STD_OUTPUT_HANDLE))
-	,c()
-	,bMove(false)
-	,gui(CONSOLEW/2,0,CONSOLEW,CONSOLEH-1,p)
+	hnd(GetStdHandle(STD_OUTPUT_HANDLE))
+	, c()
+	, bMove(false)
+	, gui(CONSOLEW / 2, 0, CONSOLEW, CONSOLEH, p)
 {
-	cam.adjustFov((CONSOLEW/2)-2, CONSOLEH-3);
+	cam.adjustFov((CONSOLEW/2)-2, CONSOLEH-2);
 	drawBorder();
 	gui.drawClear();
+	SetConsoleTitle("Kacper Sawicki ASCII RPG");
 }
-
 
 GameEngineConsole::~GameEngineConsole()
 {
@@ -31,6 +29,7 @@ void GameEngineConsole::ComposeFrame()
 		//Draw level
 		drawLevel(_map.getWidth(), _map.getHeight(), w, h);
 	}
+	goTo(0, 0);
 	
 }
 
@@ -125,7 +124,6 @@ void GameEngineConsole::drawLevel(size_t mx, size_t my, size_t w, size_t h)
 	//Oblicz offset i startowe pozycje
 	if (px + halfx > mx)
 	{
-		//px = mx - halfx;
 		offsetx = halfx-(mx- (size_t)px);
 		endx = mx;
 		startx = mx - w;
@@ -150,7 +148,8 @@ void GameEngineConsole::drawLevel(size_t mx, size_t my, size_t w, size_t h)
 	}
 
 	
-
+	size_t calcpx = halfx + 1 + offsetx;
+	size_t calcpy = halfy + 1 + offsety;
 	//Zasadnicze rysowanie zawartości
 	for (size_t y=starty; y < endy; ++y)
 	{
@@ -158,11 +157,13 @@ void GameEngineConsole::drawLevel(size_t mx, size_t my, size_t w, size_t h)
 		size_t cury = size_t(y - (py - halfy-offsety));
 		for (size_t x = startx; x < endx; ++x)
 		{
-			size_t curx = size_t(x -(px-halfx-offsetx));
-			Tile::Content a = _map.getContent(x, y);
-			goTo(curx+1, cury+1);
-			switch (a)
+				size_t curx = size_t(x - (px - halfx - offsetx));
+				Tile::Content a = _map.getContent(x, y);
+			if ( curx+1 != calcpx || cury+1 != calcpy)
 			{
+				goTo(curx + 1, cury + 1);
+				switch (a)
+				{
 				case Tile::Content::NOTHING:
 				{
 					printf(" ");
@@ -173,13 +174,14 @@ void GameEngineConsole::drawLevel(size_t mx, size_t my, size_t w, size_t h)
 					printf("@");
 					break;
 				}
+				}
 			}
 		}
 	}
 	
 
 	//Draw Dynamics
-	goTo( halfx+1+offsetx , halfy+1+offsety );
+	goTo( calcpx , calcpy );
 	printf("P");
 	/*goTo(43, 0);
 	printf("PX: %d      ",px);

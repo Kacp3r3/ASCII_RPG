@@ -27,13 +27,14 @@ void GUI::drawClear()
 	ClearRectangle(Start, End);
 	
 	//Start Gui
-	int i = 1;
-	Stats(i); // 6
-	DrawLine(6); ++i; i = 7;
-	Equipement(i); // 7
-	DrawLine(14); ++i;  i = 15;       //14
+	size_t i = 1;
 	Vec2t tmp((size_t)Start.X, i), tmp2((size_t)End.X, (size_t)End.Y);
+	i += 8;
 	ClearRectangle(tmp, tmp2);
+	DrawLine(9); ++i;
+	Stats(i); // 6
+	DrawLine(15); ++i;//14
+	Equipement(i); // 7
 }
 
 void GUI::DrawBorder()
@@ -105,39 +106,39 @@ void GUI::DrawLine(size_t starty)
 	for(size_t j = 0, e2 = End.X - Start.X - 1; j < e2; ++j) printf("-");
 }
 
-void GUI::Stats(size_t starty)
+void GUI::Stats(size_t& starty)
 {
-	int i = (int)starty;
-	goTo(Start.X + 1, Start.Y + i); printf("Base Stats"); ++i;//1
-	goTo(Start.X + 1, Start.Y + i); printf("Health : "); printf("%d/%d       ", (int)player.nHealth,(int)player.nMaxHealth); ++i; //2
-	goTo(Start.X + 1, Start.Y + i); printf("Damage : "); printf("%d  ", (int)player.nDamage); ++i; //3
-	goTo(Start.X + 1, Start.Y + i); printf("Armor  : "); printf("%d  ", (int)player.nArmor); ++i; //4
-	goTo(Start.X + 1, Start.Y + i); printf("Speed  : "); printf("%d  ", (int)player.nSpeed); ++i; //5
+	//goTo(Start.X + 1, Start.Y + i); printf("Base Stats"); ++i;//1
+	goTo(Start.X + 1, Start.Y + starty); printf("Lvl    : %d",player.getLvl()); printf(" XP: %d/%d       ", player.getcurxp(),player.getreqxp()); ++starty; //2
+	goTo(Start.X + 1, Start.Y + starty); printf("Health : "); printf("%d/%d       ", (int)player.s.nHealth,(int)player.s.nMaxHealth); ++starty; //2
+	goTo(Start.X + 1, Start.Y + starty); printf("Damage : "); printf("%d  ", (int)player.s.nDamage); ++starty; //3
+	goTo(Start.X + 1, Start.Y + starty); printf("Armor  : "); printf("%d  ", (int)player.s.nArmor); ++starty; //4
+	goTo(Start.X + 1, Start.Y + starty); printf("Speed  : "); printf("%d  ", (int)player.s.nSpeed); ++starty; //5
 }
 
-void GUI::Equipement(size_t starty)
+void GUI::Equipement(size_t& starty)
 {
-	int i = (int)starty;
-	goTo(Start.X + 1, Start.Y + i); printf("Equipement"); ++i;//7
-	goTo(Start.X + 1, Start.Y + i); printf("Helmet     : "); ++i; //8
-	goTo(Start.X + 1, Start.Y + i); printf("Chestplate : "); ++i; //9
-	goTo(Start.X + 1, Start.Y + i); printf("Gloves     : "); ++i; //10
-	goTo(Start.X + 1, Start.Y + i); printf("Boots      : "); ++i; //11
-	goTo(Start.X + 1, Start.Y + i); printf("Weapon     : "); ++i; //12
-	goTo(Start.X + 1, Start.Y + i); printf("Gold       : "); ++i; //13
+	std::vector<Item>& it = player.getItems();
+	goTo(Start.X + 1, Start.Y + starty); printf("Equipement"); ++starty;//7
+	goTo(Start.X + 1, Start.Y + starty); printf("Helmet     : %s", it[0].getName().c_str()); ++starty; //8
+	goTo(Start.X + 1, Start.Y + starty); printf("Chestplate : %s", it[1].getName().c_str()); ++starty; //9
+	goTo(Start.X + 1, Start.Y + starty); printf("Gloves     : %s", it[2].getName().c_str()); ++starty; //10
+	goTo(Start.X + 1, Start.Y + starty); printf("Boots      : %s", it[3].getName().c_str()); ++starty; //11
+	goTo(Start.X + 1, Start.Y + starty); printf("Weapon     : %s", it[4].getName().c_str()); ++starty; //12
+	goTo(Start.X + 1, Start.Y + starty); printf("Gold       : %d", player.s.nGold); ++starty; //13
 }
 
-void GUI::DialogueBox(size_t starty)
+void GUI::DialogueBox(size_t &starty)
 {
 	int i = (int)starty;
-	goTo(Start.X + 1, Start.Y + i); printf(" "); ++i;         //15
-	goTo(Start.X + 1, Start.Y + i); printf(" "); ++i;         //16
-	goTo(Start.X + 1, Start.Y + i); printf(" "); ++i;         //17
-	goTo(Start.X + 1, Start.Y + i); printf(" "); ++i;         //18
-	goTo(Start.X + 1, Start.Y + i); printf("1. "); ++i;         //19
-	goTo(Start.X + 1, Start.Y + i); printf("2. "); ++i;         //20
-	goTo(Start.X + 1, Start.Y + i); printf("3. "); ++i;         //21
-	goTo(Start.X + 1, Start.Y + i); printf("4. "); ++i;         //22
+	goTo(Start.X + 1, Start.Y + starty); printf(" "); ++starty;         //15
+	goTo(Start.X + 1, Start.Y + starty); printf(" "); ++starty;         //16
+	goTo(Start.X + 1, Start.Y + starty); printf(" "); ++starty;         //17
+	goTo(Start.X + 1, Start.Y + starty); printf(" "); ++starty;         //18
+	goTo(Start.X + 1, Start.Y + starty); printf("1. "); ++starty;         //19
+	goTo(Start.X + 1, Start.Y + starty); printf("2. "); ++starty;         //20
+	goTo(Start.X + 1, Start.Y + starty); printf("3. "); ++starty;         //21
+	goTo(Start.X + 1, Start.Y + starty); printf("4. "); ++starty;         //22
 }
 
 

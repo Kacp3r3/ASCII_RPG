@@ -24,5 +24,6 @@ protected:
 	Map _map;
 	Camera cam;
 	Player p;
+	bool hasmoved;
 };
 #endif

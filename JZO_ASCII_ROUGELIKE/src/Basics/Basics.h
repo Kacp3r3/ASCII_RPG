@@ -16,14 +16,15 @@ public:
 class Stats
 {
 public:
-	Stats() :nHealth(0), nMaxHealth(0), nDamage(0), nArmor(0), nSpeed(0) {};
-	Stats(double hp, double dmg,double arm, double spd) : nHealth(hp),nMaxHealth(hp), nDamage(dmg), nArmor(arm), nSpeed(spd) {}
+	Stats() :nHealth(0), nMaxHealth(0), nDamage(0), nArmor(0), nSpeed(0), nGold(0) {};
+	Stats(double hp, double dmg,double arm, double spd) : nHealth(hp),nMaxHealth(hp), nDamage(dmg), nArmor(arm), nSpeed(spd), nGold(0) {}
 	~Stats() {};
 	double nHealth;
 	double nMaxHealth;
 	double nDamage;
 	double nArmor;
 	double nSpeed;
+	size_t nGold;
 
 	Stats& operator +=(const Stats& rhs)
 	{
@@ -32,6 +33,18 @@ public:
 		nDamage += rhs.nDamage;
 		nArmor += rhs.nArmor;
 		nSpeed += rhs.nSpeed;
+		nGold += rhs.nGold;
+		return *this;
+	}
+
+	Stats& operator -=(const Stats& rhs)
+	{
+		nHealth -= rhs.nHealth;
+		nMaxHealth -= rhs.nMaxHealth;
+		nDamage -= rhs.nDamage;
+		nArmor -= rhs.nArmor;
+		nSpeed -= rhs.nSpeed;
+		nGold -= rhs.nGold;
 		return *this;
 	}
 };

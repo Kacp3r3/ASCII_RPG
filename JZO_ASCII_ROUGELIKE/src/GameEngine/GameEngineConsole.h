@@ -2,7 +2,7 @@
 #define GAME_CONSOLE
 
 #define CONSOLEW 80
-#define CONSOLEH 25
+#define CONSOLEH 24
 //Own files
 #include "GameEngine.h"
 #include "../ConsoleStuff/GUI.h"
